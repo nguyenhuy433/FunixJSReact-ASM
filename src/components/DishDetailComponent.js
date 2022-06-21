@@ -12,7 +12,7 @@ class DishDetail extends Component {
   renderDish(dish) {
     if (dish != null) {
       return (
-        <Card>
+        <Card className="col-xs-12 col-lg-6 col-md-6">
           <CardImg top src={dish.image} alt={dish.name} />
           <CardBody>
             <CardTitle>{dish.name}</CardTitle>
@@ -27,7 +27,7 @@ class DishDetail extends Component {
   renderComments(comments) {
     if (comments != null)
       return (
-        <div className="col-12 col-md-5 m-1">
+        <div className=" col-xs-12 col-lg-6 col-md-6">
           <h4>Comments</h4>
           <ul className="list-unstyled">
             {comments.map((comment) => {
