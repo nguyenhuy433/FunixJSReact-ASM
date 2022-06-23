@@ -14,10 +14,15 @@ function RenderStaff({ staff }) {
   if (staff != null) {
     return (
       <div className="row">
-        <div className="col-md-3 col-lg-4 col-xs-12">
-          <CardImg src={staff.image} alt={staff.name} />
+        <div className="col-md-4 col-lg-3 col-xs-12 table">
+          <CardImg
+            height="230px"
+            width="220px"
+            src={staff.image}
+            alt={staff.name}
+          />
         </div>
-        <div className="col-md-9 col-lg-8 col-xs-12">
+        <div className="col-md-8 col-lg-9 col-xs-12 table">
           <CardTitle>Họ và tên: {staff.name}</CardTitle>
           <CardText>Ngày sinh: {dateFormat(staff.doB, "dd/mm/yyyy")}</CardText>
           <CardText>
