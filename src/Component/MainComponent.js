@@ -4,6 +4,7 @@ import { DEPARTMENTS, STAFFS } from "../shared/staff";
 import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
 import Header from "./HeaderComponent";
+import Footer from "./FooterComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Main extends Component {
 
     return (
       <div>
-        <Header />;
+        <Header />
         <Switch>
           <Route
             exact
@@ -40,6 +41,7 @@ class Main extends Component {
           <Route path="/staffs/:staffid" component={StaffWithId} />
           <Redirect to="/staffs" />
         </Switch>
+        <Footer />
       </div>
     );
   }
