@@ -2,11 +2,6 @@
   padding: 20px;
 }
 
-.row-header {
-  margin: 0px auto;
-  padding: 0px auto;
-}
-
 .row-content {
   margin: 0px auto;
   padding: 50px 0px 50px 0px;
@@ -20,12 +15,6 @@
   padding: 20px 0px 20px 0px;
 }
 
-address {
-  font-size: 80%;
-  margin: 0px;
-  color: #0f0f0f;
-}
-
 .navbar-dark {
   background-color: #d3abeb;
   padding: 10px;
@@ -36,4 +25,18 @@ address {
 
 .style-dep {
   background-color: #f3e7e0;
+}
+
+.style-sara {
+  background-color: #f3e7e0;
+  padding-left: 45px;
+  padding-right: 45px;
+  margin-left: 25px;
+}
+
+.style-saraly {
+  background-color: rgb(165, 201, 118);
+  padding: 10px;
+
+  border: rgb(63, 65, 62), 2px;
 }

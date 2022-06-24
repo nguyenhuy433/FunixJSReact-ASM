@@ -13,16 +13,14 @@ function RenderSaraly({ staff }) {
   return (
     <Card className="style-sara">
       <CardBody>
-        <CardTitle className="text-left">{staff.name}</CardTitle>
+        <CardTitle>{staff.name}</CardTitle>
         <CardText>Mã nhân viên: {staff.id}</CardText>
         <CardText>Hệ số lương: {staff.salaryScale}</CardText>
         <CardText>Số ngày làm thêm: {staff.overTime}</CardText>
-        <Breadcrumb>
+        <Card className="style-saraly">
           Lương:{" "}
-          {Number(
-            staff.salaryScale * 3000000 + staff.overTime * 200000
-          ).toFixed(0)}
-        </Breadcrumb>
+          {(staff.salaryScale * 3000000 + staff.overTime * 200000).toFixed(0)}
+        </Card>
       </CardBody>
     </Card>
   );
