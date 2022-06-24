@@ -6,6 +6,7 @@ import StaffDetail from "./StaffDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import Department from "./DepartmentComponent";
+import Saraly from "./SaralyComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -44,6 +45,11 @@ class Main extends Component {
             exact
             path="/department"
             component={() => <Department dep={this.state.department} />}
+          />
+          <Route
+            exact
+            path="/salary"
+            component={() => <Saraly staffs={this.state.staffs} />}
           />
           <Redirect to="/staffs" />
         </Switch>
