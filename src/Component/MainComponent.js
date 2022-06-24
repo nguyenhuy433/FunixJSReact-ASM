@@ -5,6 +5,7 @@ import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
+import Department from "./DepartmentComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -39,6 +40,11 @@ class Main extends Component {
             component={() => <StaffList staffs={this.state.staffs} />}
           />
           <Route path="/staffs/:staffid" component={StaffWithId} />
+          <Route
+            exact
+            path="/department"
+            component={() => <Department dep={this.state.department} />}
+          />
           <Redirect to="/staffs" />
         </Switch>
         <Footer />

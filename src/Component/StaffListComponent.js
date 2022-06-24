@@ -33,7 +33,7 @@ class StaffList extends Component {
     return (
       <div className="container">
         <div className="row">
-          <h2>Danh sách nhân viên</h2>
+          <h2 className="style-text">Nhân Viên</h2>
         </div>
         <hr />
         <div className="row">{staffList}</div>
