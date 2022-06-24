@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { DEPARTMENTS, STAFFS } from "../shared/staff";
 import StaffList from "./StaffListComponent";
 import StaffDetail from "./StaffDetailComponent";
+import Header from "./HeaderComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Main extends Component {
 
     return (
       <div>
+        <Header />;
         <Switch>
           <Route
             exact
