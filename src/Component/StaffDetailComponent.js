@@ -3,7 +3,6 @@ import {
   CardImg,
   CardText,
   CardTitle,
-  CardBody,
   Breadcrumb,
   BreadcrumbItem,
 } from "reactstrap";

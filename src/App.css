@@ -2,13 +2,6 @@
   padding: 20px;
 }
 
-.row-content {
-  margin: 0px auto;
-  padding: 50px 0px 50px 0px;
-  border-bottom: 1px ridge;
-  min-height: 400px;
-}
-
 .footer {
   background-color: #d8b099;
   margin: 0px auto;
@@ -16,7 +9,7 @@
 }
 
 .navbar-dark {
-  background-color: #d3abeb;
+  background-color: #574164;
   padding: 10px;
 }
 .style-text {
