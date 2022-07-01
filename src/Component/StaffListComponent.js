@@ -6,6 +6,7 @@ import {
   Button,
   Form,
   FormGroup,
+  FormFeedback,
   Label,
   Input,
   Modal,
@@ -28,12 +29,23 @@ class StaffList extends Component {
       salaryScale: 1,
       annualLeave: 0,
       overTime: 0,
-      salary: 30000,
+      touched: {
+        name: false,
+        doB: false,
+        department: false,
+        startDate: false,
+        salaryScale: false,
+        annualLeave: false,
+        overTime: false,
+      },
     };
 
     this.toggleModal = this.toggleModal.bind(this);
     this.handlefindStaff = this.handlefindStaff.bind(this);
     this.FindStaff = this.FindStaff.bind(this);
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   // open modal them nhan vien
@@ -54,8 +66,65 @@ class StaffList extends Component {
     this.FindStaff();
     event.preventDefault();
   }
+  //input du lieu va validate
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
 
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  handleBlur = (field) => (event) => {
+    this.setState({
+      touched: { ...this.state.touched, [field]: true },
+    });
+  };
+  validate(name, doB, startDate, salaryScale, annualLeave, overTime) {
+    const errors = {
+      name: "",
+      doB: "",
+      startDate: "",
+      department: "",
+      salaryScale: "",
+      annualLeave: "",
+      overTime: "",
+    };
+    if (this.state.touched.name && name.length <= 0)
+      errors.name = "Yêu cầu nhập";
+    else if (this.state.touched.name && name.length < 3)
+      errors.name = "Tên nhân viên phải nhiều hơn 3 ký tự";
+    else if (this.state.touched.name && name.length > 25)
+      errors.name = "Tên nhân viên phải ít hơn 25 ký tự";
+
+    if (this.state.touched.doB && doB.length <= 0) errors.doB = "Yêu cầu nhập";
+
+    if (this.state.touched.startDate && startDate.length <= 0)
+      errors.startDate = "Yêu cầu nhập";
+
+    if (this.state.touched.salaryScale && salaryScale.length <= 0)
+      errors.salaryScale = "Yêu cầu nhập";
+
+    if (this.state.touched.annualLeave && annualLeave.length <= 0)
+      errors.annualLeave = "Yêu cầu nhập";
+
+    if (this.state.touched.overTime && overTime.length <= 0)
+      errors.overTime = "Yêu cầu nhập";
+
+    return errors;
+  }
   render() {
+    const errors = this.validate(
+      this.state.name,
+      this.state.doB,
+      this.state.startDate,
+      this.state.salaryScale,
+      this.state.annualLeave,
+      this.state.overTime
+    );
+
     const staffList = this.props.staffs
       .filter((staff) => {
         if (this.state.findStaff === "") {
@@ -131,21 +200,31 @@ class StaffList extends Component {
                     id="name"
                     name="name"
                     value={this.state.name}
+                    valid={errors.name === ""}
+                    invalid={errors.name !== ""}
+                    onBlur={this.handleBlur("name")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.name}</FormFeedback>
                 </div>
               </FormGroup>
 
               <FormGroup className="row">
                 <div className="col-12 col-md-4">
-                  <Label htmlFor="doB">Ngày sinh</Label>
+                  <Label htmlFor="doB">Ngày sinh </Label>
                 </div>
                 <div className="col-12 col-md-8">
                   <Input
                     type="date"
                     id="doB"
-                    name="name"
+                    name="doB"
                     value={this.state.doB}
+                    valid={errors.doB === ""}
+                    invalid={errors.doB !== ""}
+                    onBlur={this.handleBlur("doB")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.doB}</FormFeedback>
                 </div>
               </FormGroup>
 
@@ -157,9 +236,14 @@ class StaffList extends Component {
                   <Input
                     type="date"
                     id="startDate"
-                    name="name"
+                    name="startDate"
                     value={this.state.startDate}
+                    valid={errors.startDate === ""}
+                    invalid={errors.startDate !== ""}
+                    onBlur={this.handleBlur("starDate")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.startDate}</FormFeedback>
                 </div>
               </FormGroup>
 
@@ -171,8 +255,12 @@ class StaffList extends Component {
                   <Input
                     type="select"
                     id="department"
-                    name="name"
-                    value={this.state.startDate}
+                    name="department"
+                    value={this.state.department}
+                    valid={errors.department === ""}
+                    invalid={errors.department !== ""}
+                    onBlur={this.handleBlur("department")}
+                    onChange={this.handleInputChange}
                   >
                     <option>Sale</option>
                     <option>HR</option>
@@ -191,9 +279,14 @@ class StaffList extends Component {
                   <Input
                     type="number"
                     id="salaryScale"
-                    name="name"
+                    name="salaryScale"
                     value={this.state.salaryScale}
+                    valid={errors.salaryScale === ""}
+                    invalid={errors.salaryScale !== ""}
+                    onBlur={this.handleBlur("salaryScale")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.salaryScale}</FormFeedback>
                 </div>
               </FormGroup>
 
@@ -205,9 +298,14 @@ class StaffList extends Component {
                   <Input
                     type="number"
                     id="annualLeave"
-                    name="name"
+                    name="annualLeave"
                     value={this.state.annualLeave}
+                    valid={errors.annualLeave === ""}
+                    invalid={errors.annualLeave !== ""}
+                    onBlur={this.handleBlur("annualLeave")}
+                    onChange={this.handleInputChange}
                   />
+                  <FormFeedback>{errors.annualLeave}</FormFeedback>
                 </div>
               </FormGroup>
 
@@ -219,11 +317,17 @@ class StaffList extends Component {
                   <Input
                     type="number"
                     id="overTime"
-                    name="name"
+                    name="overTime"
                     value={this.state.overTime}
+                    valid={errors.overTime === ""}
+                    invalid={errors.overTime !== ""}
+                    onBlur={this.handleBlur("overTime")}
+                    onChange={this.handleInputChange}
                   />
                 </div>
+                <FormFeedback>{errors.overTime}</FormFeedback>
               </FormGroup>
+              <hr />
               <FormGroup row>
                 <Col md={{ size: 10, offset: 2 }}>
                   <Button type="submit" color="primary">
