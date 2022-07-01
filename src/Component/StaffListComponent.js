@@ -1,18 +1,33 @@
 import React, { Component } from "react";
-import { Card, CardImg, CardTitle } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardTitle,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Modal,
+  ModalBody,
+  ModalHeader,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 
 class StaffList extends Component {
   constructor(pros) {
     super(pros);
     this.state = {
-      selectedStaff: null,
+      isModalOpen: false,
     };
+
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  onStaffSelect(staff) {
+  // open modal them nhan vien
+  toggleModal() {
     this.setState({
-      selectedStaff: staff,
+      isModalOpen: !this.state.isModalOpen,
     });
   }
 
@@ -29,13 +44,41 @@ class StaffList extends Component {
         </div>
       );
     });
-
+    console.log(staffList);
     return (
       <div className="container">
         <div className="row">
-          <h2 className="style-text">Nhân Viên</h2>
+          <div className="col-12 col-md-6 mt-4">
+            <div className="row">
+              <div className="col-10 col-md-8">
+                <h2>Nhân Viên</h2>
+              </div>
+              <div className="col-2 col-md-4">
+                <Button onClick={this.toggleModal}>
+                  <span className="fa fa-plus fa-lg"></span>
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-md-6 mt-4">
+            <Form className="form-search">
+              <FormGroup className="row">
+                <div className=" col-10 col-md-8">
+                  <Input type="text" className="form-control" />
+                </div>
+                <div className="col-2 col-md-4">
+                  <Button className="button">Tìm</Button>
+                </div>
+              </FormGroup>
+            </Form>
+          </div>
         </div>
+
         <hr />
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
+          <ModalBody></ModalBody>
+        </Modal>
         <div className="row">{staffList}</div>
       </div>
     );

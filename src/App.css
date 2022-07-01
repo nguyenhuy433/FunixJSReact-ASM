@@ -33,3 +33,6 @@
 
   border: rgb(63, 65, 62), 2px;
 }
+.modal {
+  opacity: 1;
+}

@@ -1,5 +1,13 @@
 import React from "react";
-import { Card, CardTitle, CardBody, CardText } from "reactstrap";
+import {
+  Card,
+  CardTitle,
+  CardBody,
+  CardText,
+  Breadcrumb,
+  BreadcrumbItem,
+} from "reactstrap";
+import { Link } from "react-router-dom";
 
 function RenderDept(props) {
   return (
@@ -22,7 +30,9 @@ function Department(props) {
   });
   return (
     <div className="container">
-      <div className="row m-3 ">{departments}</div>
+      <div className="row">
+        <div className="row m-3 ">{departments}</div>
+      </div>
     </div>
   );
 }
