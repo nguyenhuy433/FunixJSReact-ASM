@@ -11,6 +11,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
+  Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
@@ -20,6 +21,14 @@ class StaffList extends Component {
     this.state = {
       isModalOpen: false,
       findStaff: "",
+      name: "",
+      doB: "",
+      startDate: "",
+      department: "sale",
+      salaryScale: 1,
+      annualLeave: 0,
+      overTime: 0,
+      salary: 30000,
     };
 
     this.toggleModal = this.toggleModal.bind(this);
@@ -110,7 +119,120 @@ class StaffList extends Component {
         <hr />
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <Form>
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="name">Tên</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={this.state.name}
+                  />
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="doB">Ngày sinh</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="date"
+                    id="doB"
+                    name="name"
+                    value={this.state.doB}
+                  />
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="startDate">Ngày vào công ty</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="date"
+                    id="startDate"
+                    name="name"
+                    value={this.state.startDate}
+                  />
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="department">Phòng ban</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="select"
+                    id="department"
+                    name="name"
+                    value={this.state.startDate}
+                  >
+                    <option>Sale</option>
+                    <option>HR</option>
+                    <option>Marketing</option>
+                    <option>IT</option>
+                    <option>Finance</option>
+                  </Input>
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="salaryScale">Hệ số lương</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="number"
+                    id="salaryScale"
+                    name="name"
+                    value={this.state.salaryScale}
+                  />
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="annualLeave">Số ngày nghỉ còn lại</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="number"
+                    id="annualLeave"
+                    name="name"
+                    value={this.state.annualLeave}
+                  />
+                </div>
+              </FormGroup>
+
+              <FormGroup className="row">
+                <div className="col-12 col-md-4">
+                  <Label htmlFor="overTime">Số ngày đã làm thêm</Label>
+                </div>
+                <div className="col-12 col-md-8">
+                  <Input
+                    type="number"
+                    id="overTime"
+                    name="name"
+                    value={this.state.overTime}
+                  />
+                </div>
+              </FormGroup>
+              <FormGroup row>
+                <Col md={{ size: 10, offset: 2 }}>
+                  <Button type="submit" color="primary">
+                    Thêm
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </ModalBody>
         </Modal>
         <div className="row">{staffList}</div>
       </div>
