@@ -46,6 +46,25 @@ class StaffList extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+
+    this.handleNewStaff = this.handleNewStaff.bind(this);
+  }
+
+  handleNewStaff(event) {
+    event.preventDefault();
+    const staff = {
+      name: this.state.name,
+      doB: this.state.doB,
+      startDate: this.state.startDate,
+      salaryScale: this.state.salaryScale,
+      department: this.state.department,
+      annualLeave: this.state.annualLeave,
+      overTime: this.state.overTime,
+      image: "/assets/images/alberto.png",
+    };
+    if (!this.state.doB && !this.state.startDate && !this.state.name)
+      this.setState({ touched: { doB: true, startDate: true, name: true } });
+    else this.props.addStaff(staff);
   }
 
   // open modal them nhan vien
@@ -68,9 +87,8 @@ class StaffList extends Component {
   }
   //input du lieu va validate
   handleInputChange(event) {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const value = event.target.value;
+    const name = event.target.name;
 
     this.setState({
       [name]: value,
@@ -94,18 +112,20 @@ class StaffList extends Component {
     };
     if (this.state.touched.name && name.length <= 0)
       errors.name = "Yêu cầu nhập";
-    else if (this.state.touched.name && name.length < 3)
-      errors.name = "Tên nhân viên phải nhiều hơn 3 ký tự";
-    else if (this.state.touched.name && name.length > 25)
-      errors.name = "Tên nhân viên phải ít hơn 25 ký tự";
+    else if (this.state.touched.name && name.length < 2)
+      errors.name = "Yêu cầu nhiều hơn 2 ký tự";
+    else if (this.state.touched.name && name.length > 30)
+      errors.name = "Yêu cầu ít hơn 30 ký tự";
 
     if (this.state.touched.doB && doB.length <= 0) errors.doB = "Yêu cầu nhập";
 
     if (this.state.touched.startDate && startDate.length <= 0)
       errors.startDate = "Yêu cầu nhập";
 
-    if (this.state.touched.salaryScale && salaryScale.length <= 0)
+    if (this.state.touched.salaryScale && salaryScale == "")
       errors.salaryScale = "Yêu cầu nhập";
+    else if (salaryScale < 1 || salaryScale > 3)
+      errors.salaryScale = "Hệ số lương từ 1.0 đến 3.0";
 
     if (this.state.touched.annualLeave && annualLeave.length <= 0)
       errors.annualLeave = "Yêu cầu nhập";
@@ -189,7 +209,7 @@ class StaffList extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
           <ModalBody>
-            <Form>
+            <Form onSubmit={(value) => this.handleNewStaff(value)}>
               <FormGroup className="row">
                 <div className="col-12 col-md-4">
                   <Label htmlFor="name">Tên</Label>
