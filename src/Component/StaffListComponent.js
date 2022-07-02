@@ -15,6 +15,7 @@ import {
   Col,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { DEPARTMENTS } from "../shared/staff";
 
 class StaffList extends Component {
   constructor(pros) {
@@ -25,7 +26,7 @@ class StaffList extends Component {
       name: "",
       doB: "",
       startDate: "",
-      department: "sale",
+      department: DEPARTMENTS,
       salaryScale: 1,
       annualLeave: 0,
       overTime: 0,
@@ -105,7 +106,6 @@ class StaffList extends Component {
       name: "",
       doB: "",
       startDate: "",
-      department: "",
       salaryScale: "",
       annualLeave: "",
       overTime: "",
@@ -170,7 +170,6 @@ class StaffList extends Component {
         );
       });
 
-    console.log(staffList);
     return (
       <div className="container">
         <div className="row">
@@ -274,19 +273,15 @@ class StaffList extends Component {
                 <div className="col-12 col-md-8">
                   <Input
                     type="select"
-                    id="department"
                     name="department"
                     value={this.state.department}
-                    valid={errors.department === ""}
-                    invalid={errors.department !== ""}
-                    onBlur={this.handleBlur("department")}
                     onChange={this.handleInputChange}
                   >
-                    <option>Sale</option>
-                    <option>HR</option>
-                    <option>Marketing</option>
-                    <option>IT</option>
-                    <option>Finance</option>
+                    <option>{DEPARTMENTS[0].name}</option>
+                    <option>{DEPARTMENTS[1].name}</option>
+                    <option>{DEPARTMENTS[2].name}</option>
+                    <option>{DEPARTMENTS[3].name}</option>
+                    <option>{DEPARTMENTS[4].name}</option>
                   </Input>
                 </div>
               </FormGroup>
