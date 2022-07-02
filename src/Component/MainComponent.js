@@ -18,11 +18,12 @@ class Main extends Component {
     };
     this.addStaff = this.addStaff.bind(this);
   }
-
+  // them nhan vien
   addStaff = (staff) => {
     const id = this.state.staffs.length;
     const newStaff = { id, ...staff };
     this.setState({ staffs: [...this.state.staffs, newStaff] });
+    console.log(newStaff);
     STAFFS.push(newStaff);
     console.log(STAFFS);
   };

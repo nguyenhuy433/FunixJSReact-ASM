@@ -36,3 +36,10 @@
 .modal {
   opacity: 1;
 }
+
+.button {
+  padding: 7px;
+}
+.form-control {
+  padding: 7px;
+}

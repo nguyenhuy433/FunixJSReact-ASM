@@ -26,7 +26,7 @@ class StaffList extends Component {
       name: "",
       doB: "",
       startDate: "",
-      department: DEPARTMENTS,
+      department: "Sale",
       salaryScale: 1,
       annualLeave: 0,
       overTime: 0,
@@ -51,6 +51,7 @@ class StaffList extends Component {
     this.handleNewStaff = this.handleNewStaff.bind(this);
   }
 
+  //them nhan vien
   handleNewStaff(event) {
     event.preventDefault();
     const staff = {

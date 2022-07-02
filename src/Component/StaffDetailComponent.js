@@ -27,7 +27,7 @@ function RenderStaff({ staff }) {
           <CardText>
             Ngày vào công ty: {dateFormat(staff.startDate, "dd/mm/yyyy")}
           </CardText>
-          <CardText>Phòng ban: {staff.department.name}</CardText>
+          <CardText>Phòng ban: {staff.department}</CardText>
           <CardText>Số ngày nghỉ còn lại: {staff.annualLeave}</CardText>
           <CardText>Số ngày đã làm thêm: {staff.overTime}</CardText>
         </div>
