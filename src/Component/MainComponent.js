@@ -23,7 +23,9 @@ class Main extends Component {
     const id = this.state.staffs.length;
     const newStaff = { id, ...staff };
     this.setState({ staffs: [...this.state.staffs, newStaff] });
+    STAFFS.push(newStaff);
   };
+
   render() {
     const StaffWithId = ({ match }) => {
       return (
