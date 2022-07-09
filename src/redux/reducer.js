@@ -1,11 +1,10 @@
-/* import { DEPARTMENTS, STAFFS } from "../shared/staff";
+/* import { STAFFS,DEPARTMENTS } from '../shared/staffs';
 
 export const initialState = {
-  staffs: STAFFS,
-  departments: DEPARTMENTS,
+    staffs: STAFFS,
+    departments: DEPARTMENTS
 };
 
 export const Reducer = (state = initialState, action) => {
-  return state;
-};
- */
+    return state;
+}; */

@@ -1,39 +1,58 @@
 import React from "react";
-import {
-  Card,
-  CardTitle,
-  CardBody,
-  CardText,
-  Breadcrumb,
-  BreadcrumbItem,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+import {Card, CardTitle, CardBody, CardText} from 'reactstrap';
+import { Loading } from './LoadingComponent'
+import { Link } from 'react-router-dom';
 
-function RenderDept(props) {
-  return (
-    <Card className="style-dep">
-      <CardTitle className="m-2">{props.dep.name}</CardTitle>
-      <CardBody>
-        <CardText>Số lượng nhân viên: {props.dep.numberOfStaff}</CardText>
-      </CardBody>
-    </Card>
-  );
-}
-
-function Department(props) {
-  const departments = props.dep.map((department) => {
+function RenderDept ({dept, staffs}) {
     return (
-      <div className="col-12 col-md-6 col-lg-4 mt-3 mb-3" key={department.id}>
-        <RenderDept dep={department} />
-      </div>
-    );
-  });
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="row m-3 ">{departments}</div>
-      </div>
-    </div>
-  );
+        <div>
+        <Link to={`/department/${dept.id}`}>
+            <Card>
+                <CardTitle className='m-2'>{dept.name}</CardTitle>
+                <CardBody>
+                    <CardText>
+                        Số lượng nhân viên: {staffs.staffs.filter(staff=>staff.departmentId===dept.id).length}
+                    </CardText>
+                </CardBody>
+            </Card>
+        </Link>
+        </div>
+    )
 }
-export default Department;
+
+function Department (props) {
+    const department = props.department.department.map((department) => {
+        return(
+            <div className="col-12 col-md-6 col-lg-4 mt-3 mb-3" key={department.id}>
+                <RenderDept key={department.id} dept={department}  staffs={props.staffs} />
+            </div>
+        )
+    });
+
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    } else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{this.props.errMess}</h4>
+                </div>
+            </div>
+        );
+    } else 
+    
+    return(
+        <div className="container">
+            <div className="row m-3">
+                {department}
+            </div>
+        </div>
+    )
+}
+export default Department
