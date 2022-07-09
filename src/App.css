@@ -1,0 +1,45 @@
+.table {
+  padding: 20px;
+}
+
+.footer {
+  background-color: #d8b099;
+  margin: 0px auto;
+  padding: 20px 0px 20px 0px;
+}
+
+.navbar-dark {
+  background-color: #574164;
+  padding: 10px;
+}
+.style-text {
+  margin-left: 15px;
+}
+
+.style-dep {
+  background-color: #f3e7e0;
+}
+
+.style-sara {
+  background-color: #f3e7e0;
+  padding-left: 45px;
+  padding-right: 45px;
+  margin-left: 25px;
+}
+
+.style-saraly {
+  background-color: rgb(165, 201, 118);
+  padding: 10px;
+
+  border: rgb(63, 65, 62), 2px;
+}
+.modal {
+  opacity: 1;
+}
+
+.button {
+  padding: 7px;
+}
+.form-control {
+  padding: 7px;
+}
