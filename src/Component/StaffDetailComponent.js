@@ -14,7 +14,12 @@ function RenderStaff({ staff, department }) {
     return (
       <div className="row">
         <div className="col-12 col-md-4 col-lg-3">
-          <CardImg src={staff.image} alt={staff.name} />
+          <CardImg
+            height="230px"
+            width="220px"
+            src={staff.image}
+            alt={staff.name}
+          />
         </div>
         <div className="col-12 col-md-8 col-lg-9">
           <CardTitle>Họ và tên: {staff.name}</CardTitle>
@@ -33,7 +38,52 @@ function RenderStaff({ staff, department }) {
   }
 }
 
-const StaffDetail = (props) => {
+class StaffDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      staff: this.props.staff,
+      department: this.props.department,
+    };
+  }
+  render() {
+    if (this.state.staff != null) {
+      return (
+        <div className="container">
+          <div className="row">
+            <Breadcrumb>
+              <BreadcrumbItem>
+                <Link to="/staffs">Nhân Viên</Link>
+              </BreadcrumbItem>
+              <BreadcrumbItem active>{this.state.staff.name}</BreadcrumbItem>
+            </Breadcrumb>
+            <div className="col-12">
+              <hr />
+            </div>
+            <div className="col-12">
+              <RenderStaff
+                staff={this.state.staff}
+                department={
+                  this.state.department.filter(
+                    (department) =>
+                      department.id === this.state.staff.departmentId
+                  )[0]
+                }
+              />
+              <br />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+}
+
+export default StaffDetail;
+
+/* function StaffDetail(props) {
   if (props.staff != null) {
     return (
       <div className="container">
@@ -50,9 +100,11 @@ const StaffDetail = (props) => {
           <div className="col-12">
             <RenderStaff
               staff={props.staff}
-              department={props.department.filter(
-                (department) => department.id === props.staff.departmentId
-              )}
+              department={
+                props.department.filter(
+                  (department) => department.id === props.staff.departmentId
+                )[0]
+              }
             />
             <br />
           </div>
@@ -62,6 +114,5 @@ const StaffDetail = (props) => {
   } else {
     return <div></div>;
   }
-};
-
-export default StaffDetail;
+}
+ */

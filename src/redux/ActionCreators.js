@@ -2,11 +2,29 @@ import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 
 export const fetchStaffs = () => (dispatch) => {
-  dispatch(staffsLoading());
+  dispatch(staffsLoading(true));
 
   return fetch(baseUrl + "staffs")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
     .then((response) => response.json())
-    .then((staffs) => dispatch(addStaffs(staffs)));
+    .then((staffs) => dispatch(addStaffs(staffs)))
+    .catch((error) => dispatch(staffsFailed(error.message)));
 };
 
 export const addStaffs = (staffs) => ({
@@ -24,11 +42,29 @@ export const staffsFailed = (errmess) => ({
 });
 
 export const fetchDepartment = () => (dispatch) => {
-  dispatch(departmentLoading());
+  dispatch(departmentLoading(true));
 
   return fetch(baseUrl + "departments")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
     .then((response) => response.json())
-    .then((department) => dispatch(addDepartment(department)));
+    .then((department) => dispatch(addDepartment(department)))
+    .catch((error) => dispatch(departmentFailed(error.message)));
 };
 
 export const addDepartment = (department) => ({
@@ -49,8 +85,26 @@ export const fetchSalary = () => (dispatch) => {
   dispatch(salaryLoading(true));
 
   return fetch(baseUrl + "staffsSalary")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        var errmess = new Error(error.message);
+        throw errmess;
+      }
+    )
     .then((response) => response.json())
-    .then((salary) => dispatch(addSalary(salary)));
+    .then((salary) => dispatch(addSalary(salary)))
+    .catch((error) => dispatch(salaryFailed(error.message)));
 };
 
 export const addSalary = (salary) => ({

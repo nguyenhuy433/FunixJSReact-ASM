@@ -78,21 +78,9 @@ class StaffList extends Component {
       });
 
     if (this.props.staffs.isLoading) {
-      return (
-        <div className="container">
-          <div className="row">
-            <Loading />
-          </div>
-        </div>
-      );
+      return <Loading />;
     } else if (this.props.staffs.errMess) {
-      return (
-        <div className="container">
-          <div className="row">
-            <h4>{this.props.errMess}</h4>
-          </div>
-        </div>
-      );
+      return <h4>{this.props.errMess}</h4>;
     } else {
       return (
         <div className="container">
