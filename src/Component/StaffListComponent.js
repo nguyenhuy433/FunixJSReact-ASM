@@ -17,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Loading } from "./LoadingComponent";
+import { FadeTransform, Fade, Stagger } from "react-animation-components";
 
 class StaffList extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class StaffList extends Component {
     this.handlefindStaff = this.handlefindStaff.bind(this);
     this.FindStaff = this.FindStaff.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleNewstaff = this.handleNewstaff.bind(this);
   }
 
   toggleModal() {
@@ -46,6 +48,19 @@ class StaffList extends Component {
   handlefindStaff(event) {
     this.FindStaff();
     event.preventDefault();
+  }
+
+  handleNewstaff(values) {
+    this.toggleModal();
+    this.props.postStaff(
+      values.name,
+      values.doB,
+      values.salaryScale,
+      values.startDate,
+      values.departmentId,
+      values.annualLeave,
+      values.overTime
+    );
   }
 
   render() {
@@ -67,12 +82,19 @@ class StaffList extends Component {
       .map((staff) => {
         return (
           <div key={staff.id} className="col-md-4 col-lg-2 col-6 text-center">
-            <Card className="mt-4">
-              <Link to={`/staffs/${staff.id}`}>
-                <CardImg width="100%" src={staff.image} alt={staff.name} />
-                <CardTitle>{staff.name}</CardTitle>
-              </Link>
-            </Card>
+            <FadeTransform
+              in
+              transformProps={{
+                exitTransform: "scale(0.5) translateY(-50%)",
+              }}
+            >
+              <Card className="mt-4">
+                <Link to={`/staffs/${staff.id}`}>
+                  <CardImg width="100%" src={staff.image} alt={staff.name} />
+                  <CardTitle>{staff.name}</CardTitle>
+                </Link>
+              </Card>
+            </FadeTransform>
           </div>
         );
       });
@@ -121,7 +143,7 @@ class StaffList extends Component {
           <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
             <ModalHeader toggle={this.toggleModal}>Thêm Nhân Viên</ModalHeader>
             <ModalBody>
-              <LocalForm>
+              <LocalForm onSubmit={this.handleNewstaff}>
                 <Row className="form-group">
                   <div className="col-12 col-md-4">
                     <Label htmlFor="name">Tên nhân viên</Label>
@@ -145,7 +167,7 @@ class StaffList extends Component {
                         model=".name"
                         show="touched"
                         messages={{
-                          required: " Yêu cầu nhập ",
+                          required: "Yêu cầu nhập ",
                           minLength: "Tên nhân viên phải nhiều hơn 2 ký tự",
                           maxLength: "Tên nhân viên phải ít hơn 30 ký tự",
                         }}
@@ -158,7 +180,6 @@ class StaffList extends Component {
                   <div className="col-12 col-md-4">
                     <Label htmlFor="doB">Ngày sinh</Label>
                   </div>
-
                   <div className="col-12 col-md-8">
                     <Col>
                       <Control
@@ -248,7 +269,6 @@ class StaffList extends Component {
                         id="salaryScale"
                         name="salaryScale"
                         className="form-control"
-                        defaultValue="1"
                         value={this.state.staffs.salaryScale}
                         validators={{
                           required,
@@ -259,7 +279,7 @@ class StaffList extends Component {
                         model=".salaryScale"
                         show="touched"
                         messages={{
-                          required: "Hệ số lương từ 1.0 đến 3.0",
+                          required: "Yêu cầu nhập",
                         }}
                       />
                     </Col>
@@ -325,6 +345,7 @@ class StaffList extends Component {
                     </Col>
                   </div>
                 </Row>
+
                 <Row className="form-group">
                   <Col md={{ size: 10, offset: 2 }}>
                     <Button type="submit" color="primary">
@@ -335,7 +356,11 @@ class StaffList extends Component {
               </LocalForm>
             </ModalBody>
           </Modal>
-          <div className="row">{staffList}</div>
+          <Stagger in>
+            <Fade in>
+              <div className="row">{staffList}</div>
+            </Fade>
+          </Stagger>
         </div>
       );
     }

@@ -9,10 +9,12 @@ import Salary from "./SalaryComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
+  postStaff,
   fetchStaffs,
   fetchDepartment,
   fetchSalary,
 } from "../redux/ActionCreators";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const mapStateToProps = (state) => {
   return {
@@ -32,6 +34,26 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSalary: () => {
     dispatch(fetchSalary());
   },
+  postStaff: (
+    name,
+    doB,
+    salaryScale,
+    startDate,
+    departmentId,
+    annualLeave,
+    overTime
+  ) =>
+    dispatch(
+      postStaff(
+        name,
+        doB,
+        salaryScale,
+        startDate,
+        departmentId,
+        annualLeave,
+        overTime
+      )
+    ),
 });
 
 class Main extends Component {
@@ -51,6 +73,7 @@ class Main extends Component {
             )[0]
           }
           department={this.props.department.department}
+          deleteStaff={this.props.deleteStaff}
         />
       );
     };
@@ -69,47 +92,57 @@ class Main extends Component {
     return (
       <div>
         <Header />
-        <Switch>
-          <Route
-            exact
-            path="/staffs"
-            component={() => (
-              <StaffList
-                staffs={this.props.staffs}
-                isLoading={this.props.staffs.isLoading}
-                errMess={this.props.staffs.errMess}
+        <TransitionGroup>
+          <CSSTransition
+            key={this.props.location.key}
+            classNames="page"
+            timeout={300}
+          >
+            <Switch>
+              <Route
+                exact
+                path="/staffs"
+                component={() => (
+                  <StaffList
+                    staffs={this.props.staffs}
+                    isLoading={this.props.staffs.isLoading}
+                    errMess={this.props.staffs.errMess}
+                    postStaff={this.props.postStaff}
+                    deleteStaff={this.props.deleteStaff}
+                  />
+                )}
               />
-            )}
-          />
-          <Route path="/staffs/:staffId" component={StaffWithId} />
-          <Route
-            exact
-            path="/department"
-            component={() => (
-              <Department
-                staffs={this.props.staffs}
-                department={this.props.department}
-                isLoading={this.props.department.isLoading}
-                errMess={this.props.department.errMess}
+              <Route path="/staffs/:staffId" component={StaffWithId} />
+              <Route
+                exact
+                path="/department"
+                component={() => (
+                  <Department
+                    staffs={this.props.staffs}
+                    department={this.props.department}
+                    isLoading={this.props.department.isLoading}
+                    errMess={this.props.department.errMess}
+                  />
+                )}
               />
-            )}
-          />
-          <Route
-            path="/department/:departmentId"
-            component={DepartmentWithId}
-          />
-          <Route
-            path="/salary"
-            component={() => (
-              <Salary
-                salary={this.props.salary}
-                isLoading={this.props.salary.isLoading}
-                errMess={this.props.salary.errMess}
+              <Route
+                path="/department/:departmentId"
+                component={DepartmentWithId}
               />
-            )}
-          />
-          <Redirect to="/staffs" />
-        </Switch>
+              <Route
+                path="/salary"
+                component={() => (
+                  <Salary
+                    salary={this.props.salary}
+                    isLoading={this.props.salary.isLoading}
+                    errMess={this.props.salary.errMess}
+                  />
+                )}
+              />
+              <Redirect to="/staffs" />
+            </Switch>
+          </CSSTransition>
+        </TransitionGroup>
         <Footer />
       </div>
     );

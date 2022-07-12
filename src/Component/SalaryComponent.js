@@ -9,6 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Loading } from "./LoadingComponent";
+import { Fade, Stagger } from "react-animation-components";
 
 function RenderSalary({ salary }) {
   return (
@@ -18,12 +19,12 @@ function RenderSalary({ salary }) {
         <CardText>Mã nhân viên: {salary.id}</CardText>
         <CardText>Hệ số lương: {salary.salaryScale}</CardText>
         <CardText>Số ngày làm thêm: {salary.overTime}</CardText>
-        <Card className="style-saraly">
-          Lương:
+        <Breadcrumb className="style-saraly">
+          Lương:{" "}
           {Number(
             salary.salaryScale * 3000000 + salary.overTime * 200000
           ).toFixed()}
-        </Card>
+        </Breadcrumb>
       </CardBody>
     </Card>
   );
@@ -96,7 +97,11 @@ function Salary(props) {
           </Breadcrumb>
         </div>
         <div>
-          <div className="row m-1">{salarys}</div>
+          <Stagger in>
+            <Fade in>
+              <div className="row m-1">{salarys}</div>
+            </Fade>
+          </Stagger>
         </div>
       </div>
     );
