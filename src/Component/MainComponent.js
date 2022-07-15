@@ -73,7 +73,6 @@ class Main extends Component {
             )[0]
           }
           department={this.props.department.department}
-          deleteStaff={this.props.deleteStaff}
         />
       );
     };
